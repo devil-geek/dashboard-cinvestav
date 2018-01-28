@@ -1,0 +1,131 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <h5>Select start and end date</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xxs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                        <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                            <div class="input-group">
+                                <div class="input-group-prepend" style="cursor: pointer">
+                                    <span class="input-group-text"><i class="fa fa-lg fa-calendar"></i></span>
+                                </div>
+                                <input class="form-control" ng-model="startDate" placeholder="Select Start Date" />
+                            </div>
+                        </datepicker>
+                    </div>
+                    <div class="col-xxs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                        <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                            <div class="input-group">
+                                <div class="input-group-prepend" style="cursor: pointer">
+                                    <span class="input-group-text"><i class="fa fa-lg fa-calendar"></i></span>
+                                </div>
+                                <input class="form-control" ng-model="endDate" placeholder="Select End Date" />
+                            </div>
+                        </datepicker>
+                    </div>
+                    <div class="col-xxs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                        <label class="md-radio block">
+                            <input type="radio" name="demo2[]">
+                            <span class="md-radio--fake">
+                                        <span></span>
+                            </span>
+                            <div>
+                                Table
+                            </div>
+                        </label>
+                        <label class="md-radio block">
+                            <input type="radio" name="demo2[]" checked="true">
+                            <span class="md-radio--fake">
+                                        <span></span>
+                            </span>
+                            <div>
+                                Graphic
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <hr/>
+                <h5>Sensors</h5>
+                <div class="row">
+                    <div class="col-xs-8 col-md-8">
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                NO2
+                            </div>
+                        </label>
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                O3
+                            </div>
+                        </label>
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                PHOTOMETER
+                            </div>
+                        </label>
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                ULTRASONIC
+                            </div>
+                        </label>
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                PIR
+                            </div>
+                        </label>
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                CO
+                            </div>
+                        </label>
+                        <label class="md-checkbox block">
+                            <input type="checkbox" name="demo2[]">
+                            <span class="md-checkbox--fake"></span>
+                            <div>
+                                CO2
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-xs-3 col-md-2">
+                        <button type="button" class="btn btn-block btn-primary btn-lg card-2">Consult</button>
+                    </div>
+                    <div class="col-xs-3 col-md-2">
+                        <button type="button" class="btn btn-block btn-orange btn-lg card-2">Export CSV</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-5">
+          <h4 class="card-title mb-0">Historic events</h4>
+          <div class="small text-muted">{{startDate + ' - ' + endDate}}</div>
+        </div>
+        <!--/.col-->
+      </div>
+      <!--/.row-->
+      <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.card-->
+</div>
