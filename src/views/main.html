@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
 	<div class="row">
-    <div class="col-xxs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" ng-repeat="s in sensors">
+    <div class="col-xxs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" ng-repeat="s in sensors track by $index">
       <div class="card sensorWidget card-1">
         <div class="card-body p-0 clearfix">
           <i class="{{s.icon}} {{s.color}} p-4 {{s.icon != 'N/A' ? 'font-2xl' : 'f1'}} mr-3 float-left">

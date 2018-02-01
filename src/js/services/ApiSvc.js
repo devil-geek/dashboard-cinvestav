@@ -74,8 +74,7 @@ angular.module("app")
             getDeviceLogs: function(page) {
                 var defered = $q.defer();
                 var promise = defered.promise;
-
-                $http.get(API + 'devices/device_logs/page/1?info_types=24')
+                $http.get(API + 'devices/device_logs/page/1?date_start="2018/01/31"&?order=1')
                     .then(function(res) {
                         defered.resolve(res.data);
                     })
@@ -89,7 +88,7 @@ angular.module("app")
                 var defered = $q.defer();
                 var promise = defered.promise;
 
-                $http.get(API + 'devices/device_logs/page/1?device_mac=' + device_mac)
+                $http.get(API + 'devices/device_logs/page/1?order=0&device_mac=' + device_mac)
                     .then(function(res) {
                         defered.resolve(res.data);
                     })
