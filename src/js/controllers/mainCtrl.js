@@ -3,48 +3,76 @@ angular
     .module('app')
     .controller('MainCtrl', function($scope, ApiSvc, $timeout, DEVICE_TYPES) {
         $scope.sensors = []
-        var j = 0;
         ApiSvc.getAllSensors()
             .then(function(res) {
+                console.log(res)
                 for (var i = 0; i < res.rowCount; i++) {
-                    var s = DEVICE_TYPES[res.collection[i].database_info.type]
-                    s.mac = res.collection[i].device_mac
-                    s.value = 0
-                    $scope.sensors.push(s)
-                    ApiSvc.getSensorMeasures(res.collection[i].device_mac)
-                        .then(function(res) {
-                            console.log(res)
-                            
-                            if (res.collection[0].info.values.value)
-                                $scope.sensors[j].value = res.collection[0].info.values.value
-                            else if (res.collection[0].info.values.status)
-                                $scope.sensors[j].value = res.collection[0].info.values.status
-                            else if (res.collection[0].info.values.humidity){
-                                $scope.sensors[j].value = "H: " + res.collection[0].info.values.humidity + 
-                                " T: " + res.collection[0].info.values.temperature +
-                                " P: " + res.collection[0].info.values.pressure 
-                            }
-                            else if (res.collection[0].info.values.error.label)
-                                $scope.sensors[j].value = res.collection[0].info.values.error.label
-                            else if (res.collection[0].info.values.error)  
-                                $scope.sensors[j].value = res.collection[0].info.values.error            
-                            j++
-                            
-                        })
-                        .catch(function(err) {
-                            console.log(err)
-                        })
-                    
+
+                    (function(i) {
+                        var s = DEVICE_TYPES[res.collection[i].type]
+                        s.mac = res.collection[i].device_mac
+
+                        ApiSvc.getSensorMeasures(res.collection[i].device_mac)
+                            .then(function(res) {
+                                console.log(res)
+
+                                if (res.collection[0].info.values.value)
+                                    s.value = res.collection[0].info.values.value
+
+                                else if (res.collection[0].info.values.status)
+                                    s.value = res.collection[0].info.values.status
+
+                                else if (res.collection[0].info.values.pressure) {
+                                    $scope.sensors.push(
+                                        {
+                                            name: 'PTH PRESSURE', 
+                                            mac: s.mac, 
+                                            color: s.color,
+                                            icon: 'fa fa-tachometer',
+                                            value: res.collection[0].info.values.pressure
+                                        })
+                                    $scope.sensors.push(
+                                        {
+                                            name: 'PTH TEMPERATURE', 
+                                            mac: s.mac, 
+                                            color: s.color,
+                                            icon: 'fa fa-thermometer',
+                                            value: res.collection[0].info.values.temperature
+                                        })
+
+
+                                    s.value = res.collection[0].info.values.humidity
+                                    
+                                } 
+
+                                else if (res.collection[0].info.values.error.label)
+                                    s.value = res.collection[0].info.values.error.label
+
+                                else if (res.collection[0].info.values.error)
+                                    s.value = res.collection[0].info.values.error
+                                else
+                                    s.value = 0
+
+                                $scope.sensors.push(s)
+
+
+                            })
+                            .catch(function(err) {
+                                console.log(err)
+                            })
+                    })(i);
+
+
                 }
-                
+
             })
             .catch(function(err) {
                 console.log(err)
             })
 
-            $timeout(function(){
-                console.log($scope.sensors)
-            },1000)
+        $timeout(function() {
+            console.log($scope.sensors)
+        }, 1000)
         /*ApiSvc.getAllDevices()
             .then(function(res) {
                 console.log(res);

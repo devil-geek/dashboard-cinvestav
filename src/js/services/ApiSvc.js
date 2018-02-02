@@ -1,7 +1,7 @@
 angular.module("app")
     .service("ApiSvc", function($http, $q) {
 
-        
+
 
         const INFO_TYPES = {
             DEFAULT: {
@@ -46,8 +46,15 @@ angular.module("app")
             getAllSensors: function() {
                 var defered = $q.defer();
                 var promise = defered.promise;
+                var sensor_types = [6, 7, 8, 9, 10, 13, 17, 21, 22, 23, 24]
 
-                $http.get(API + 'network/sensors/all')
+                $http({
+                        method: 'GET',
+                        url: API + 'devices/all',
+                        params: {
+                            "device_types[]": sensor_types
+                        }
+                    })
                     .then(function(res) {
                         defered.resolve(res.data);
                     })
@@ -61,7 +68,12 @@ angular.module("app")
                 var defered = $q.defer();
                 var promise = defered.promise;
 
-                $http.get(API + 'devices/all?device_types=3&device_except=true')
+                $http.get({
+                        url: API + 'devices/all',
+                        params: {
+                            "device_types[]": sensor_types
+                        }
+                    })
                     .then(function(res) {
                         defered.resolve(res.data);
                     })
@@ -74,7 +86,14 @@ angular.module("app")
             getDeviceLogs: function(page) {
                 var defered = $q.defer();
                 var promise = defered.promise;
-                $http.get(API + 'devices/device_logs/page/1?date_start="2018/01/31"&?order=1')
+
+                $http({
+                        method: 'GET',
+                        url: API + 'devices/device_logs/page/1?date_start="2018/01/31"&?order=1',
+                        params: {
+
+                        }
+                    })
                     .then(function(res) {
                         defered.resolve(res.data);
                     })
@@ -88,7 +107,14 @@ angular.module("app")
                 var defered = $q.defer();
                 var promise = defered.promise;
 
-                $http.get(API + 'devices/device_logs/page/1?order=0&device_mac=' + device_mac)
+                $http({
+                        method: 'GET',
+                        url: API + 'devices/device_logs/page/1',
+                        params: {
+                            'order': 1,
+                            'device_mac': device_mac,
+                        }
+                    })
                     .then(function(res) {
                         defered.resolve(res.data);
                     })
