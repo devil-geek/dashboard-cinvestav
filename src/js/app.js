@@ -49,5 +49,5 @@ angular
     21: {name: 'CO', icon: 'N/A', color: 'bg-orange text-white'},
     22: {name: 'CO2', icon: 'N/A', color: 'bg-purple text-white'},
     23: {name: 'O3', icon: 'N/A', color: 'bg-lime text-white'},
-    24: {name: 'NO2' , icon: 'N/A', color: 'bg-aqua text-white'}
+    24: {name: 'NO2', icon: 'N/A', color: 'bg-aqua text-white'}
   })

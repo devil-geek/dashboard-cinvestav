@@ -3,6 +3,7 @@ angular
   .module('app')
   .controller('MainCtrl', function ($scope, ApiSvc, $timeout, DEVICE_TYPES, localStorageService, SocketSvc) {
     $scope.sensors = []
+    let device_macs = []
 
     SocketSvc.emit('logIn', 'car')
     let query = {
@@ -14,10 +15,14 @@ angular
       device_types: 3,
       device_except: true
     }
+    let query5 = {
+      cmd_type: 'NETWORK',
+      cmd: 'LAST_MEASURES'
+    }
 
     /* SocketSvc.emit('devices/all', JSON.stringify(query2)) */
-    SocketSvc.emit('device_logs', JSON.stringify(query))
-    SocketSvc.emit('command', JSON.stringify(query))
+    // SocketSvc.emit('device_logs', JSON.stringify(query))
+    SocketSvc.emit('command', JSON.stringify(query5))
 
     SocketSvc.on('message', function (msg) {
       console.log('MSG', msg)
@@ -41,101 +46,44 @@ angular
 
     SocketSvc.on('command', function (data) {
       console.log('Command:', data)
+      let d = JSON.parse(data)
+      $scope.sensors = []
+      for (const key in d) {
+        if (d.hasOwnProperty(key)) {
+          const element = d[key]
+          console.log(key, element)
+          element.map((item, key) => {
+            var s = DEVICE_TYPES[item.device_type]
+            s.value = item.body.measure
+            $scope.sensors.push(s)
+            device_macs.push(item.mac_addr)
+          })
+        }
+      }
     })
 
     SocketSvc.on('nodes', function (data) {
       console.log('Nodes:', data)
     })
 
-    ApiSvc.getAllSensors()
-      .then(function (res) {
-        console.log(res)
-        for (var i = 0; i < res.rowCount; i++) {
-          (function (i) {
-            var s = DEVICE_TYPES[res.collection[i].type]
-            s.mac = res.collection[i].device_mac
-
-            ApiSvc.getSensorMeasures(res.collection[i].device_mac)
-              .then(function (res) {
-                console.log(res)
-
-                if (res.collection[0].info.values.value) { s.value = res.collection[0].info.values.value } else if (res.collection[0].info.values.status) { s.value = res.collection[0].info.values.status } else if (res.collection[0].info.values.pressure) {
-                  $scope.sensors.push(
-                    {
-                      name: 'PTH PRESSURE',
-                      mac: s.mac,
-                      color: s.color,
-                      icon: 'fa fa-tachometer',
-                      value: res.collection[0].info.values.pressure
-                    })
-                  $scope.sensors.push(
-                    {
-                      name: 'PTH TEMPERATURE',
-                      mac: s.mac,
-                      color: s.color,
-                      icon: 'fa fa-thermometer',
-                      value: res.collection[0].info.values.temperature
-                    })
-
-                  s.value = res.collection[0].info.values.humidity
-                } else if (res.collection[0].info.values.error.label) { s.value = res.collection[0].info.values.error.label } else if (res.collection[0].info.values.error) { s.value = res.collection[0].info.values.error } else { s.value = 0 }
-
-                $scope.sensors.push(s)
-              })
-              .catch(function (err) {
-                console.log(err)
-              })
-          })(i)
+    function getMeasures () {
+      device_macs.map((item) => {
+        console.log(item)
+        let query = {
+          cmd_type: 'DEVICE_COMMAND',
+          cmd: 'CMD_GET_MEASURES',
+          mac_addr: item
         }
+        SocketSvc.emit('command', JSON.stringify(query))
       })
-      .catch(function (err) {
-        console.log(err)
-      })
+    }
 
-    $timeout(function () {
+    /* $timeout(function () {
+      console.log(device_macs)
+      getMeasures()
       console.log($scope.sensors)
-    }, 1000)
-    /* ApiSvc.getAllDevices()
-        .then(function(res) {
-            console.log(res);
-            for (var i = 0; i < res.rowCount; i++) {
-                console.log(DEVICE_TYPES[res.collection[i].type])
+    }, 10000) */
 
-                ApiSvc.getSensorMeasures(res.collection[i].device_mac)
-                    .then(function(res) {
-                        console.log("Measures")
-                        console.log(res.collection[0].info.values.value);
-                        console.log(res.collection[0]);
-                    })
-                    .catch(function(err) {
-                        console.log(err)
-                    })
-
-            }
-        })
-        .catch(function(err) {
-            console.log(err)
-        })
-
-    ApiSvc.getDeviceLogs(10)
-        .then(function(res) {
-            console.log(res);
-        })
-        .catch(function(err) {
-            console.log(err)
-        })
-
-    $scope.sensors = [
-        { name: "NO2", value: 120, icon: "N/A", color: "bg-aqua text-white" },
-        { name: "CO2", value: 120, icon: "N/A", color: "bg-purple text-white" },
-        { name: "O3 ", value: 120, icon: "N/A", color: "bg-lime text-white" },
-        { name: "PHOTOMETER", value: 120, icon: "fa fa-sun-o", color: "bg-danger text-white" },
-        { name: "ULTRASONIC", value: 120, icon: "fa fa-rss", color: "bg-red text-white" },
-        { name: "PIR", value: "PRESENT", icon: "fa fa-eye", color: "bg-green text-white" },
-        { name: "CO ", value: 120, icon: "N/A", color: "bg-orange text-white" },
-        { name: "I/O", value: "ON", icon: "N/A", color: "bg-blue text-white" }
-    ]
-*/
     // convert Hex to RGBA
     function convertHex (hex, opacity) {
       hex = hex.replace('#', '')
