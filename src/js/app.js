@@ -34,20 +34,20 @@ angular
   }])
 
   .constant('DEVICE_TYPES', {
-    1: 'PCA',
-    2: 'PC',
-    3: 'NODE',
-    4: 'GPRS_BRIDGE',
-    5: 'POWER_SOURCE',
-    6: 'IO',
-    7: 'PIR',
-    8: 'ULTRASONIC_DISTANCE_SENSOR',
-    9: 'ULTRASONIC_DISTANCE_SENSOR_T2',
-    10: 'PHOTOMETER',
-    13: 'PTH',
-    17: 'SOUND_LEVEL',
-    21: 'CO',
-    22: 'CO2',
-    23: 'O3',
-    24: 'NO2'
+    1: {name: 'PCA', icon: '', color: ''},
+    2: {name: 'PC', icon: '', color: ''},
+    3: {name: 'NODE', icon: '', color: ''},
+    4: {name: 'GPRS_BRIDGE', icon: '', color: ''},
+    5: {name: 'POWER_SOURCE', icon: '', color: ''},
+    6: {name: 'IO', icon: 'N/A', color: 'bg-blue text-white'},
+    7: {name: 'PIR', icon: 'fa fa-eye', color: 'bg-green text-white'},
+    8: {name: 'ULTRASONIC', icon: 'fa fa-rss', color: 'bg-red text-white'},
+    9: {name: 'ULTRASONIC_T2', icon: 'fa fa-rss', color: 'bg-red text-white'},
+    10: {name: 'PHOTOMETER', icon: 'fa fa-sun-o', color: 'bg-danger text-white'},
+    13: {name: 'PTH HUMIDITY', icon: 'fa fa-tint', color: 'bg-pink text-white'}, // PTH
+    17: {name: 'SOUND_LEVEL', icon: 'fa fa-volume-up', color: 'bg-indigo text-white'},
+    21: {name: 'CO', icon: 'N/A', color: 'bg-orange text-white'},
+    22: {name: 'CO2', icon: 'N/A', color: 'bg-purple text-white'},
+    23: {name: 'O3', icon: 'N/A', color: 'bg-lime text-white'},
+    24: {name: 'NO2' , icon: 'N/A', color: 'bg-aqua text-white'}
   })

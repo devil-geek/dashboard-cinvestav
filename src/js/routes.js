@@ -67,6 +67,7 @@ angular
           }]
         }
       })
+
       .state('app.main', {
         url: '/dashboard',
         templateUrl: 'views/main.html',
@@ -83,7 +84,7 @@ angular
           }],
           loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load({
-              files: ['js/controllers/main.js']
+              files: ['js/controllers/mainCtrl.js']
             })
           }]
         }

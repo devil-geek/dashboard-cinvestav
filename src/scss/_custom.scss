@@ -15,6 +15,10 @@
 		width: 75px !important;
 		text-align: center !important;
 	}
+	.pth{
+		font-size: 0.9em !important;
+		font-weight: bold !important;
+	}
 }
 
 .card-1 {
@@ -91,6 +95,12 @@
 }
 .bg-green{
 	background-color: rgba(0, 166, 90, 1) !important;
+}
+.bg-pink{
+	background-color: $pink !important;
+}
+.bg-indigo{
+	background-color: $indigo !important;
 }
 
 .md-checkbox, .md-radio{
