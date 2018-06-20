@@ -11,7 +11,7 @@ var grayLight = '#818a91'
 var grayLighter = '#d1d4d7'
 var grayLightest = '#f8f9fa'
 
-var API = 'http://ttrservers.dyndns.org:9091/api/'
+var API = 'http://127.0.0.1:23456/api/'
 angular
   .module('app', [
     'ui.router',

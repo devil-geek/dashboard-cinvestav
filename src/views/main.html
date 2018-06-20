@@ -6,7 +6,11 @@
           <i class="{{s.icon}} {{s.color}} p-4 {{s.icon != 'N/A' ? 'font-2xl' : 'f1'}} mr-3 float-left">
           	{{s.icon == 'N/A' ? s.name : ''}}
           </i>
-          <div class="h5 text-primary mb-0 pt-3 {{s.name == 'PTH' ? 'pth' : ''}}">{{s.value}}</div>
+          <h4 ng-show={{!s.error}} class="h4 text-primary mb-0 pt-3 {{s.name == 'PTH' ? 'pth' : ''}}">{{s.value}}</h4>
+          <h5 ng-show={{s.error}} class="h5 text-primary mb-0 pt-3 {{s.name == 'PTH' ? 'pth' : ''}}">
+            {{s.value}}
+          </h5>
+          
           <div class="text-muted text-uppercase font-weight-bold font-xs">{{s.name}}</div>
         </div>
       </div>
