@@ -10881,7 +10881,7 @@ base-chart.chart {
       background-size: 12.5px;
       transition: .3s; }
     .sidebar .sidebar-minimizer:focus, .sidebar .sidebar-minimizer.focus {
-      outline: 0; }
+      outline: 0 !important; }
     .sidebar .sidebar-minimizer:hover {
       background-color: rgba(0, 0, 0, 0.3); }
       .sidebar .sidebar-minimizer:hover::before {
@@ -12487,7 +12487,7 @@ hr.transparent {
   border-radius: 1rem !important; }
 
 .open > a, .show > a {
-  outline: 0; }
+  outline: 0 !important; }
 
 .navbar .dropdown-toggle .img-avatar {
   height: 35px;
@@ -12755,7 +12755,8 @@ hr.transparent {
 .bg-indigo {
   background-color: #3F51B5 !important; }
 
-.md-checkbox, .md-radio {
+.md-checkbox,
+.md-radio {
   font-size: 1rem !important; }
 
 .md-checkbox--fake {
@@ -12776,8 +12777,19 @@ hr.transparent {
 .rzslider :focus {
   outline: none !important; }
 
-h5, .h5 {
+h5,
+.h5 {
   font-size: .8rem; }
 
 .is-danger {
   color: #F44336; }
+
+.is-marginless {
+  margin: 0 !important; }
+
+.is-last {
+  font-weight: 300;
+  color: #536c79; }
+
+.navbar-toggler .mobile-sidebar-toggler .d-lg-none:focus {
+  outline: 0 !important; }

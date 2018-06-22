@@ -49,6 +49,7 @@
     "run-sequence": "2.2.1"
   },
   "scripts": {
+    "start": "npm run serve",
     "gulp": "gulp",
     "build": "gulp build:dist",
     "serve": "gulp serve",

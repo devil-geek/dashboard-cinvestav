@@ -51,58 +51,16 @@
                 <h5>Sensors</h5>
                 <div class="row">
                     <div class="col-xs-8 col-md-8">
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
+                        <label class="md-checkbox block" ng-repeat="s in sensorsHistoric track by $index">
+                            <input type="checkbox" name="sensorInfo[]" ng-model="s.checked">
                             <span class="md-checkbox--fake"></span>
                             <div>
-                                NO2
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                O3
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                PHOTOMETER
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                ULTRASONIC
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                PIR
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                CO
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                CO2
+                                {{s.name}}
                             </div>
                         </label>
                     </div>
                     <div class="col-xs-3 col-md-2">
-                        <button type="button" class="btn btn-block btn-primary btn-lg card-2">Consult</button>
+                        <button ng-click="Consult()" type="button" class="btn btn-block btn-primary btn-lg card-2">Consult</button>
                     </div>
                     <div class="col-xs-3 col-md-2">
                         <button type="button" class="btn btn-block btn-orange btn-lg card-2">Export CSV</button>

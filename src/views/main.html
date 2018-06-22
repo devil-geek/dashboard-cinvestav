@@ -3,15 +3,20 @@
     <div class="col-xxs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" ng-repeat="s in sensors track by $index">
       <div class="card sensorWidget card-1">
         <div class="card-body p-0 clearfix">
-          <i class="{{s.icon}} {{s.color}} p-4 {{s.icon != 'N/A' ? 'font-2xl' : 'f1'}} mr-3 float-left">
+          <i ng-style="{backgroundColor: s.color}" class="{{s.icon}} p-4 {{s.icon != 'N/A' ? 'font-2xl' : 'f1'}} mr-3 float-left text-white">
           	{{s.icon == 'N/A' ? s.name : ''}}
           </i>
-          <h4 ng-show={{!s.error}} class="h4 text-primary mb-0 pt-3 {{s.name == 'PTH' ? 'pth' : ''}}">{{s.value}}</h4>
+          <h4 ng-show={{!s.error}} class="h4 text-primary mb-0 pt-3 {{s.name == 'PTH' ? 'pth' : ''}}">
+            {{s.value}}
+          </h4>
           <h5 ng-show={{s.error}} class="h5 text-primary mb-0 pt-3 {{s.name == 'PTH' ? 'pth' : ''}}">
             {{s.value}}
           </h5>
           
-          <div class="text-muted text-uppercase font-weight-bold font-xs">{{s.name}}</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            {{s.name}}
+            <!-- <p class='is-marginless is-last'>{{s.last}}</p>  -->
+          </div>
         </div>
       </div>
     </div>
@@ -22,8 +27,8 @@
     <div class="card-body">
       <div class="row">
         <div class="col-sm-5">
-          <h4 class="card-title mb-0">Last events</h4>
-          <div class="small text-muted">November 2017</div>
+          <h4 class="card-title mb-0">Últimos eventos</h4>
+          <div class="small text-muted">{{today}}</div>
         </div>
         <!--/.col-->
       </div>

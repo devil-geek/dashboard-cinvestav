@@ -59,6 +59,11 @@ angular
               ]
             }])
           }],
+          loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              files: ['js/services/ApiSvc.js', 'js/services/SocketSvc.js']
+            })
+          }],
           loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
             // you can lazy load controllers
             return $ocLazyLoad.load({
@@ -77,11 +82,6 @@ angular
           label: 'Dashboard'
         },
         resolve: {
-          loadMyService: ['$ocLazyLoad', function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              files: ['js/services/ApiSvc.js', 'js/services/SocketSvc.js']
-            })
-          }],
           loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               files: ['js/controllers/mainCtrl.js']
