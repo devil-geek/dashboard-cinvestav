@@ -23,7 +23,10 @@ angular
     'ncy-angular-breadcrumb',
     'angular-loading-bar',
     'LocalStorageModule',
-    'btford.socket-io'
+    'btford.socket-io',
+    'angular-lodash',
+    'ngSanitize',
+    'ngCsv'
   ])
   .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false

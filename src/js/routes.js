@@ -53,6 +53,13 @@ angular
             },
             {
               serie: true,
+              name: 'zingchart-angularjs',
+              files: [
+                'node_modules/zingchart-angularjs/src/zingchart-angularjs.js'
+              ]
+            },
+            {
+              serie: true,
               name: 'moment',
               files: [
                 'node_modules/moment/min/moment.min.js'

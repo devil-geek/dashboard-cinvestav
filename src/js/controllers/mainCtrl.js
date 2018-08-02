@@ -9,6 +9,8 @@ angular
     let colors = {}
     let refreshTime = 10000
     let dataSize = 20
+    let sensors = {}
+    $scope.series = []
     $scope.today = moment().format('DD-MMM-YYYY')
     let device_macs = [
       12295,
@@ -22,6 +24,96 @@ angular
       54023,
       54024
     ]
+
+    $scope.myJson = {
+      gui: {
+        contextMenu: {
+          button: {
+            visible: 0
+          }
+        }
+      },
+      backgroundColor: '#FFF',
+      globals: {
+        shadow: true,
+        fontFamily: 'Helvetica'
+      },
+      type: 'area',
+      legend: {
+        // layout: 'x4',
+        align: 'center',
+        'vertical-align': 'top',
+        backgroundColor: '#434343',
+        borderColor: 'transparent',
+        marker: {
+          borderRadius: '50px',
+          borderColor: 'transparent'
+        },
+        item: {
+          fontColor: 'white'
+        }
+
+      },
+      scaleX: {
+        maxItems: 8,
+        transform: {
+          type: 'date',
+          all: '%D, %d %M %Y<br>%h:%i %A',
+          itemsOverlap: true
+        },
+        zooming: true,
+        values: [],
+        // lineColor: 'white',
+        lineWidth: '1px',
+        tick: {
+          // lineColor: 'white',
+          lineWidth: '1px'
+        },
+        /* item: {
+          fontColor: 'white'
+        }, */
+        guide: {
+          visible: false
+        }
+      },
+      scaleY: {
+        // lineColor: 'white',
+        lineWidth: '1px',
+        tick: {
+          // lineColor: 'white',
+          lineWidth: '1px'
+        },
+        guide: {
+          lineStyle: 'solid',
+          lineColor: '#626262'
+        }
+        /* item: {
+          fontColor: 'white'
+        } */
+      },
+      tooltip: {
+        visible: false
+      },
+      crosshairX: {
+        scaleLabel: {
+          backgroundColor: '#434343',
+          fontColor: 'white'
+        },
+        plotLabel: {
+          backgroundColor: '#434343',
+          fontColor: '#FFF',
+          _text: 'Number of hits : %v'
+        }
+      },
+      plot: {
+        lineWidth: '2px',
+        aspect: 'spline',
+        marker: {
+          visible: false
+        }
+      },
+      series: []
+    }
 
     SocketSvc.emit('logIn', 'UI' + random(0, 100000))
 
@@ -48,6 +140,7 @@ angular
       // console.log('Last', data)
       let d = JSON.parse(data)
       $scope.sensors = []
+      let sensors = {}
 
       d.map(item => {
         setMeasures(item)
@@ -111,10 +204,14 @@ angular
     }
 
     function setMeasures (data) {
-      console.log(data)
+      if (moment(data.timestamp).diff(moment(), 'days') !== 0) {
+        return
+      }
+      console.log('DATA', data)
       if (data.device_type < 6) { return }
-      var s = DEVICE_TYPES[data.device_type]
+      let s = Object.create(DEVICE_TYPES[data.device_type])
       s.mac = data.device_mac
+      console.log('MAC', s.mac)
       s.last = moment(data.timestamp).format('DD-MM-YY HH:mm:ss')
 
       if (data.info.values.value) {
@@ -151,40 +248,44 @@ angular
       }
 
       if (!isNaN(s.value)) {
-        addToGraph(s.name, s.value, s.color)
-      }
-
-      if (!data.info.values.error) {
-        $scope.sensors.push(s)
-      }
-    }
-
-    function addToGraph (sensor, value, color) {
-      if (data[sensor]) {
-        if (data[sensor].length >= dataSize) {
-          data[sensor].shift()
-          data[sensor].push(value)// random(0, 200))
-
-          if ($scope.labels.length > dataSize) {
-            let del = Object.values(labels)[0]
-            delete labels[del]
+        if ($scope.myJson.scaleX.values.indexOf(moment(data.timestamp).valueOf()) === -1) {
+          if ($scope.myJson.scaleX.values.length >= 20) {
+            $scope.myJson.scaleX.values.shift()
           }
-        } else {
-          data[sensor].push(value)// random(0, 200))
+          $scope.myJson.scaleX.values =
+            $scope.myJson.scaleX.values.concat(moment(data.timestamp).valueOf())
         }
-      } else {
-        data[sensor] = [value]// random(0, 200)]
-        series[sensor] = sensor
-        colors[sensor] = {
-          backgroundColor: 'transparent',
-          borderColor: color
+        let found = $scope.myJson.series.find(function (element) {
+          return element.mac === s.mac
+        })
+        if (!found) {
+          $scope.myJson.series.push(
+            {
+              text: s.name,
+              mac: s.mac,
+              values: [s.value],
+              backgroundColor1: s.color,
+              backgroundColor2: s.color,
+              lineColor: s.color
+            }
+          )
+        } else {
+          $scope.myJson.series.map(item => {
+            if (item.mac === s.mac) {
+              if (item.values.length >= 20) {
+                item.values.shift()
+              }
+              item.values = item.values.concat(s.value)
+            }
+          })
         }
       }
-      labels[moment().format('HH:mm.ss')] = moment().format('HH:mm.ss')
-      $scope.labels = Object.values(labels)
-      $scope.data = Object.values(data)
-      $scope.series = Object.values(series)
-      $scope.colors = Object.values(colors)
+      sensors[data.device_mac] = s
+      console.log(sensors)
+      $scope.sensors = Object.values(sensors)
+      /* if (!data.info.values.error) {
+        $scope.sensors.push(s)
+      } */
     }
 
     $interval(function () {
@@ -193,16 +294,5 @@ angular
 
     function random (min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min)
-    }
-
-    $scope.options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 0
-      },
-      legend: {
-        display: true
-      }
     }
   })
