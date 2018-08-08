@@ -18,7 +18,7 @@
 .open, .show {
   // Remove the outline when :focus is triggered
   > a {
-    outline: 0;
+    outline: 0 !important;
   }
 }
 

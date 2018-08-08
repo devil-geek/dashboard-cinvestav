@@ -51,81 +51,38 @@
                 <h5>Sensors</h5>
                 <div class="row">
                     <div class="col-xs-8 col-md-8">
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
+                        <label class="md-checkbox block" ng-repeat="s in sensorsHistoric track by $index">
+                            <input type="checkbox" name="sensorInfo[]" ng-model="s.checked">
                             <span class="md-checkbox--fake"></span>
                             <div>
-                                NO2
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                O3
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                PHOTOMETER
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                ULTRASONIC
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                PIR
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                CO
-                            </div>
-                        </label>
-                        <label class="md-checkbox block">
-                            <input type="checkbox" name="demo2[]">
-                            <span class="md-checkbox--fake"></span>
-                            <div>
-                                CO2
+                                {{s.name}}
                             </div>
                         </label>
                     </div>
                     <div class="col-xs-3 col-md-2">
-                        <button type="button" class="btn btn-block btn-primary btn-lg card-2">Consult</button>
+                        <button ng-click="Consult()" type="button" class="btn btn-block btn-primary btn-lg card-2">Consult</button>
                     </div>
                     <div class="col-xs-3 col-md-2">
-                        <button type="button" class="btn btn-block btn-orange btn-lg card-2">Export CSV</button>
+                        <button 
+                        type="button" 
+                        class="btn btn-block btn-orange btn-lg card-2"
+                        ng-csv="sensors"
+                        csv-header="['Date', 'Device', 'MAC', 'Type', 'Sensor', 'Value']"
+                        filename="test.csv"
+                         ng-disabled="noData"
+                         >Export CSV</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-5">
-          <h4 class="card-title mb-0">Historic events</h4>
-          <div class="small text-muted">{{startDate + ' - ' + endDate}}</div>
+        <div class="card" ng-show="noData">
+            <div class="card-body">
+                <h4>No hay datos que mostrar.</h4>      
+            </div>
         </div>
-        <!--/.col-->
-      </div>
-      <!--/.row-->
-      <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" height="300"></canvas>
-      </div>
-    </div>
-  </div>
-  <!--/.card-->
+        <!--/.card-->
+<div ng-show="!noData" zingchart id="myChart" zc-json="myJson" zc-width="100%" zc-height="568px"></div>
+
 </div>

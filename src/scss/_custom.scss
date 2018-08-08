@@ -1,49 +1,55 @@
 // Here you can add other styles
-.login{
-	img{
-		max-width: 75px !important;
-	}
+.login {
+  img {
+    max-width: 75px !important;
+  }
 }
-.f1{
-	font-size: 1.1em !important;
-	font-weight: bold;
-	box-sizing: border-box !important;
-	padding: 1.5rem 1.2rem !important;
+
+.f1 {
+  font-size: 1.1em !important;
+  font-weight: bold;
+  box-sizing: border-box !important;
+  padding: 1.5rem 1.2rem !important;
 }
-.sensorWidget{
-	i{
-		width: 75px !important;
-		text-align: center !important;
-	}
+
+.sensorWidget {
+  i {
+    width: 75px !important;
+    text-align: center !important;
+  }
+  .pth {
+    font-size: 0.9em !important;
+    font-weight: bold !important;
+  }
 }
 
 .card-1 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 .card-1:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .card-2 {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .card-3 {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .card-4 {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .card-5 {
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
-.app-header{
-  box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 2px 3px rgba(0,0,0,0.23);
+.app-header {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
   border-bottom: 1px solid $cinvestav !important;
 }
 
@@ -56,68 +62,109 @@
   }
 }
 
-.app-header.navbar .navbar-toggler{
-	color: white !important;
+.app-header.navbar .navbar-toggler {
+  color: white !important;
 }
 
 ._720kb-datepicker-calendar-header:nth-child(odd) {
-    background: $cinvestav !important;
+  background: $cinvestav !important;
 }
 
-._720kb-datepicker-calendar-header{
-	font-size: 16px !important;
+._720kb-datepicker-calendar-header {
+  font-size: 16px !important;
 }
 
-.text-white{
-	color: white !important;
-}
-.bg-blue{
-	background-color: rgba(0, 115, 183, 1) !important;
-}
-.bg-aqua{
-	background-color: rgba(0, 192, 239, 1) !important;
-}
-.bg-purple{
-	background-color: #605ca8 !important;
-}
-.bg-lime{
-	background-color: rgb(205, 220, 57) !important;
-}
-.bg-red{
-	background-color: rgba(221, 75, 57, 1) !important;
-}
-.bg-orange{
-	background-color: rgba(243, 156, 18, 1) !important;
-}
-.bg-green{
-	background-color: rgba(0, 166, 90, 1) !important;
+.text-white {
+  color: white !important;
 }
 
-.md-checkbox, .md-radio{
-	font-size: 1rem !important;
+.bg-blue {
+  background-color: rgba(0, 115, 183, 1) !important;
 }
 
-.md-checkbox--fake{
-	margin: 10px 0px 10px 18px !important;
+.bg-aqua {
+  background-color: rgba(0, 192, 239, 1) !important;
 }
 
-.md-radio--fake{
-	box-sizing: content-box !important;
+.bg-purple {
+  background-color: #605ca8 !important;
 }
 
-.md-radio--fake span{
-	box-sizing: content-box !important;
-}
-.md-radio{
-	box-sizing: content-box !important;
+.bg-lime {
+  background-color: rgb(205, 220, 57) !important;
 }
 
-.btn-orange{
-	color: #fff !important;
+.bg-red {
+  background-color: rgba(221, 75, 57, 1) !important;
 }
 
-.rzslider{
-	:focus {
-    	outline: none !important;
+.bg-orange {
+  background-color: rgba(243, 156, 18, 1) !important;
+}
+
+.bg-green {
+  background-color: rgba(0, 166, 90, 1) !important;
+}
+
+.bg-pink {
+  background-color: $pink !important;
+}
+
+.bg-indigo {
+  background-color: $indigo !important;
+}
+
+.md-checkbox,
+.md-radio {
+  font-size: 1rem !important;
+}
+
+.md-checkbox--fake {
+  margin: 10px 0px 10px 18px !important;
+}
+
+.md-radio--fake {
+  box-sizing: content-box !important;
+}
+
+.md-radio--fake span {
+  box-sizing: content-box !important;
+}
+
+.md-radio {
+  box-sizing: content-box !important;
+}
+
+.btn-orange {
+  color: #fff !important;
+}
+
+.rzslider {
+  :focus {
+    outline: none !important;
+  }
+}
+
+h5,
+.h5 {
+  font-size: .8rem;
+}
+
+.is-danger {
+  color: $red;
+}
+
+.is-marginless {
+  margin: 0 !important;
+}
+
+.is-last {
+  font-weight: 300;
+  color: $gray-600;
+}
+
+.navbar-toggler .mobile-sidebar-toggler .d-lg-none{
+	&:focus{
+		outline: 0 !important;
 	}
 }
